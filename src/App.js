@@ -4,13 +4,21 @@ import {useEffect, useState} from "react";
 
 function App() {
     const [counter, setCounter] = useState(0);
+    const [keywored, setKeywored] = useState("")
     const onClick = () => setCounter((prev) => prev + 1);
-    console.log("i run all the time");
+    const onChange = (e) => setKeywored(e.target.value);
     useEffect(() => {
-        console.log("CALL THE API....");
+        console.log("I run only once");
     }, []);
+    useEffect(() => {
+        console.log("I run when 'keyword' changes")
+    }, [keywored]);
+    useEffect(() => {
+        console.log("I run when 'counter & keyword' changes")
+    }, [counter, keywored]);
     return (
         <div>
+            <input onChange={onChange} type="text" placeholder={"Search here..."}/>
             <h1 className={styles.title}>
                 {counter}
             </h1>
